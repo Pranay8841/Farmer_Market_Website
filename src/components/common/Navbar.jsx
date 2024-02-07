@@ -48,8 +48,8 @@ const Navbar = () => {
                 </nav>
 
                 {/* Login / Signup / Dashboard */}
-                <div >
-
+                <div className='hidden items-center gap-x-4 md:flex'>
+                    
                 </div>
             </div>
         </div>
