@@ -45,4 +45,5 @@ app.get("/", async (req, res) => {
   });
 });
 
+//Server is runing
 app.listen(PORT, () => console.log(`Server start on ${PORT}`));
