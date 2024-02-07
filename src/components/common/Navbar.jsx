@@ -51,6 +51,7 @@ const Navbar = () => {
 
                 {/* Login / Signup / Dashboard */}
                 <div className='hidden items-center gap-x-4 md:flex'>
+
                     <Link to="/dashboard/cart" className='relative'>
                         <AiOutlineShoppingCart className='text-2xl text-brown-700' />
 
