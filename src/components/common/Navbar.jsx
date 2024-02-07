@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavbarLinks } from '../../data/NavbarLinks'
 import { Link, matchPath, useLocation } from 'react-router-dom'
+import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai"
+import ProfileDropDown from '../core/Auth/ProfileDropDown'
 
 const Navbar = () => {
     const location = useLocation();
@@ -48,9 +50,33 @@ const Navbar = () => {
                 </nav>
 
                 {/* Login / Signup / Dashboard */}
-                <div >
+                <div className='hidden items-center gap-x-4 md:flex'>
+                    <Link to="/dashboard/cart" className='relative'>
+                        <AiOutlineShoppingCart className='text-2xl text-brown-700' />
 
+                        <span className='absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-brown-700 text-center text-xs font-bold text-white'>
+                            1
+                        </span>
+                    </Link>
+
+                    <Link to='/login'>
+                        <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
+                            Log In
+                        </button>
+                    </Link>
+
+                    <Link to='/signup'>
+                        <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
+                            Sign Up
+                        </button>
+                    </Link>
+
+                    <ProfileDropDown />
                 </div>
+
+                <button className="mr-4 md:hidden">
+                    <AiOutlineMenu fontSize={24} fill="#54433a" />
+                </button>
             </div>
         </div>
     )
