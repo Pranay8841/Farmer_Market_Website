@@ -4,37 +4,30 @@ const fs = require("fs");
 //User model
 const User = require("../models/user");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.resolve(`./public/uploads/profiles/`));
-  },
-  filename: function (req, file, cb) {
-    const filename = `${Date.now()}-${file.originalname}`;
-    cb(null, filename);
-  },
-});
-
-const upload = multer({ storage: storage });
-
 async function handleUserSignup(req, res) {
   try {
-    const { username, email, password, role, address, contact } = req.body;
+    const { username, email, password, roles, address, contact } = req.body;
 
     const newUser = new User({
-      username,
-      email,
-      password,
+      username: username,
+      email: email,
+      password: password,
       profileImageURL: `/uploads/profiles/${req.file.filename}`,
-      role,
-      address,
-      contact,
+      roles: roles,
+      address: address,
+      contact: contact,
     });
 
     const savedUser = await newUser.save();
-    await fs.promises.appendFile(
-      "../log.txt",
-      `New user created:- ${savedUser.username}`
-    );
+    try {
+      await fs.promises.appendFile(
+        "../log.txt",
+        `New user created:- ${savedUser.username}`
+      );
+      console.log("Log appended successfully");
+    } catch (error) {
+      console.error("Error appending to log:", error);
+    }
     return res.status(201).redirect("/");
   } catch (error) {
     console.error("Error creating user:", error);
