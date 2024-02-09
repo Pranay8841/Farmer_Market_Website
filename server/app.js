@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 const userRouter = require("./routes/user.js");
+const machineRouter = require("./routes/machines.js");
 
 const {
   checkForAuthenticationCookie,
@@ -38,6 +39,7 @@ app.use(express.static(path.resolve("./public")));
 
 // Routes
 app.use("/api/user", userRouter);
+app.use("/api/machine", machineRouter);
 
 app.get("/", async (req, res) => {
   res.render("home", {
