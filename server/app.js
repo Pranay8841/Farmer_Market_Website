@@ -6,12 +6,22 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
-const userRouter = require("./routes/user.js");
-const machineRouter = require("./routes/machines.js");
+const animalRouter = require("./routes/animalRoute.js");
+// const cerealRouter = require("./routes/cerealRoute.js");
+// const fertiliserRouter = require("./routes/fertiliserRoute.js");
+// const fruitRouter = require("./routes/fruitRoute.js");
+// const mechanicalEquipmentRouter = require("./routes/mechanicalEquipmentRoute.js");
+// const milkRouter = require("./routes/milkRoute.js");
+const machineRouter = require("./routes/machinesRoute.js");
+// const milkProductRouter = require("./routes/milkProductRoute.js");
+// const pesticidesRouter = require("./routes/pesticidesRoute.js");
+// const seedRouter = require("./routes/seedRoute.js");
+const userRouter = require("./routes/userRoute.js");
+// const vegetableRoter = require("./routes/vegetableRoute.js");
 
 const {
   checkForAuthenticationCookie,
-} = require("./middlewares/authentication.js");
+} = require("./middlewares/authentication");
 
 const app = express();
 
@@ -40,6 +50,16 @@ app.use(express.static(path.resolve("./public")));
 // Routes
 app.use("/api/user", userRouter);
 app.use("/api/machine", machineRouter);
+app.use("/api/animal", animalRouter);
+// app.use("/api/cereal", cerealRouter);
+// app.use("/api/fertilider", fertiliserRouter);
+// app.use("/api/fruit", fruitRouter);
+// app.use("/api/mechanicalEquipment", mechanicalEquipmentRouter);
+// app.use("/api/milk", milkRouter);
+// app.use("/api/milkProduct", milkProductRouter);
+// app.use("/api/pesticides", pesticidesRouter);
+// app.use("/api/seed", seedRouter);
+// app.use("/api/vegetable", vegetableRoter);
 
 app.get("/", async (req, res) => {
   res.render("home", {

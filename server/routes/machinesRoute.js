@@ -5,7 +5,7 @@ const {
   handleMachineUpdate,
   handleMahineDelete,
   handleGetMachine,
-} = require("../controllers/machines");
+} = require("../controllers/machinesControl");
 
 const path = require("path");
 

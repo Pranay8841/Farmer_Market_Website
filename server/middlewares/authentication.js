@@ -1,3 +1,5 @@
+// authentication.js
+
 const { validateToken } = require("../services/authentication");
 
 function checkForAuthenticationCookie(cookieName) {

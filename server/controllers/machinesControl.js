@@ -1,9 +1,5 @@
-const multer = require("multer");
-const path = require("path");
 const fs = require("fs");
-
 const Machines = require("../models/machines");
-const { fstat } = require("fs");
 
 async function handleMachineCreation(req, res) {
   try {
@@ -44,7 +40,7 @@ async function handleMachineCreation(req, res) {
   } catch (error) {
     console.error("Error creating user:", error);
     return res.status(500).json({
-      error: "Error machine user",
+      error: "Error creating machine",
     });
   }
 }
@@ -74,7 +70,7 @@ async function handleMachineUpdate(req, res) {
     });
   } catch (error) {
     return res.status(500).json({
-      error: "Error machine user",
+      error: "Server side Error",
     });
   }
 }
@@ -101,7 +97,9 @@ async function handleGetMachine(req, res) {
     });
 
     if (!machine) {
-      return res.status(404).json({ message: "No machine found for this user" });
+      return res
+        .status(404)
+        .json({ message: "No machine found for this user" });
     }
 
     res.status(200).json({ message: "Machine found", machine });
