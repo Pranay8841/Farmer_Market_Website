@@ -5,6 +5,7 @@ const {
   handleUserSignin,
   handleUserUpdate,
   handleUserDelete,
+  handleGetUser,
 } = require("../controllers/user.js");
 const path = require("path");
 
@@ -41,7 +42,7 @@ router.get("/logout", (req, res) => {
 });
 
 //REST api for user profile
-
+router.get("/:id", handleGetUser);
 router.get("/profile", (req, res) => {
   return res.render("profile", {
     user: req.user,

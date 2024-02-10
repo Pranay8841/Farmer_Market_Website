@@ -56,7 +56,7 @@ async function handleUserUpdate(req, res) {
     // console.log(req);
     const id = req.params.id;
     const updateDetails = req.body;
-    console.log(id, "   detail   ", updateDetails);
+    // console.log(id, "   detail   ", updateDetails);
 
     const updatedUser = await User.findByIdAndUpdate(
       { _id: id },
@@ -93,9 +93,28 @@ async function handleUserDelete(req, res) {
   }
 }
 
+async function handleGetUser(req, res) {
+  try {
+    const id = req.params.id;
+    const user = await User.findOne({
+      _id: id,
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "No user found for this user" });
+    }
+
+    res.status(200).json({ message: "User found", user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 module.exports = {
   handleUserSignup,
   handleUserSignin,
   handleUserUpdate,
   handleUserDelete,
+  handleGetUser,
 };

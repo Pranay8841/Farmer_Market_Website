@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 
 const Machines = require("../models/machines");
 const { fstat } = require("fs");
@@ -32,7 +33,7 @@ async function handleMachineCreation(req, res) {
     try {
       await fs.promises.appendFile(
         "../log.txt",
-        `New user created:- ${savedUser.username}`
+        `New machine created:- ${saveMachine.productName} Date- ${Date()}\n`
       );
       console.log("Log appended successfully");
     } catch (error) {
@@ -48,4 +49,71 @@ async function handleMachineCreation(req, res) {
   }
 }
 
-module.exports = { handleMachineCreation };
+async function handleMachineUpdate(req, res) {
+  try {
+    const id = req.params.id;
+    const updateDetails = req.body;
+
+    console.log(id);
+
+    console.log(updateDetails);
+
+    const updatedMachine = await Machines.findByIdAndUpdate(
+      { _id: id },
+      { $set: updateDetails },
+      { new: true }
+    );
+
+    if (!updatedMachine) {
+      return res.status(404).json({ message: "Machine not found" });
+    }
+
+    console.log(updatedMachine);
+    res.status(200).json({
+      machine: updatedMachine,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error machine user",
+    });
+  }
+}
+
+async function handleMahineDelete(req, res) {
+  try {
+    const id = req.params.id;
+    await Machines.findByIdAndDelete({
+      _id: id,
+    });
+
+    res.status(204).json("Machine delete");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+async function handleGetMachine(req, res) {
+  try {
+    const id = req.params.id;
+    const machine = await Machines.findOne({
+      _id: id,
+    });
+
+    if (!machine) {
+      return res.status(404).json({ message: "No machine found for this user" });
+    }
+
+    res.status(200).json({ message: "Machine found", machine });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+module.exports = {
+  handleMachineCreation,
+  handleMachineUpdate,
+  handleMahineDelete,
+  handleGetMachine,
+};
