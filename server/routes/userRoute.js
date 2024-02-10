@@ -6,7 +6,7 @@ const {
   handleUserUpdate,
   handleUserDelete,
   handleGetUser,
-} = require("../controllers/user.js");
+} = require("../controllers/userControl");
 const path = require("path");
 
 const router = Router();
