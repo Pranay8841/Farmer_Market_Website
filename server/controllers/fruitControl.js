@@ -1,23 +1,25 @@
 const fs = require("fs");
-const Cereal = require("../models/cereal");
+const Fruit = require("../models/fruit");
 
-async function handleCerealCreation(req, res) {
+async function handleFruitCreation(req, res) {
   try {
-    const { grainName, description, price, quantityAvailable } = req.body;
+    const { fruitName, description, price, quantityAvailable, color } =
+      req.body;
 
-    const newCereal = new Cereal({
-      grainName: grainName,
+    const newFruit = new Fruit({
+      fruitName: fruitName,
       description: description,
       price: price,
       quantityAvailable: quantityAvailable,
+      color: color,
       imageURL: `/uploads/products/${req.file.filename}`,
     });
 
-    const saveCereal = await newCereal.save();
+    const saveFruit = await newFruit.save();
     try {
       await fs.promises.appendFile(
         "../log.txt",
-        `New cereal created:- ${saveCereal.grainName} Date- ${Date()}\n`
+        `New Fruit created:- ${saveFruit.fruitName} Date- ${Date()}\n`
       );
       console.log("Log appended successfully");
     } catch (error) {
@@ -26,14 +28,14 @@ async function handleCerealCreation(req, res) {
 
     return res.status(201).redirect("/");
   } catch (error) {
-    console.error("Error creating cereal:", error);
+    console.error("Error creating Fruit:", error);
     return res.status(500).json({
       error: "Server Error",
     });
   }
 }
 
-async function handleCerealUpdate(req, res) {
+async function handleFruitUpdate(req, res) {
   try {
     const id = req.params.id;
     const updateDetails = req.body;
@@ -42,19 +44,19 @@ async function handleCerealUpdate(req, res) {
 
     console.log(updateDetails);
 
-    const updatedCereal = await Cereal.findByIdAndUpdate(
+    const updatedFruit = await Fruit.findByIdAndUpdate(
       { _id: id },
       { $set: updateDetails },
       { new: true }
     );
 
-    if (!updatedCereal) {
-      return res.status(404).json({ message: "Cereal not found" });
+    if (!updatedFruit) {
+      return res.status(404).json({ message: "Fruit not found" });
     }
 
-    console.log(updatedCereal);
+    console.log(updatedFruit);
     res.status(200).json({
-      updatedCereal,
+      updatedFruit,
     });
   } catch (error) {
     return res.status(500).json({
@@ -63,32 +65,32 @@ async function handleCerealUpdate(req, res) {
   }
 }
 
-async function handleCerealDelete(req, res) {
+async function handleFruitDelete(req, res) {
   try {
     const id = req.params.id;
-    await Cereal.findByIdAndDelete({
+    await Fruit.findByIdAndDelete({
       _id: id,
     });
 
-    res.status(204).json("Cereal delete");
+    res.status(204).json("Fruit delete");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
   }
 }
 
-async function handleGetCereal(req, res) {
+async function handleGetFruit(req, res) {
   try {
     const id = req.params.id;
-    const cereal = await Cereal.findOne({
+    const Fruit = await Fruit.findOne({
       _id: id,
     });
 
-    if (!cereal) {
-      return res.status(404).json({ message: "No Cereal found for this user" });
+    if (!Fruit) {
+      return res.status(404).json({ message: "No Fruit found for this user" });
     }
 
-    res.status(200).json({ message: "Cereal found", cereal });
+    res.status(200).json({ message: "Fruit found", Fruit });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
@@ -96,8 +98,8 @@ async function handleGetCereal(req, res) {
 }
 
 module.exports = {
-  handleCerealCreation,
-  handleCerealUpdate,
-  handleCerealDelete,
-  handleGetCereal,
+  handleFruitCreation,
+  handleFruitUpdate,
+  handleFruitDelete,
+  handleGetFruit,
 };

@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("imageURL");
 
 router.get("/:id", handleGetMachine);
-router.post("/createMahine", upload, handleMachineCreation);
+router.post("/create", upload, handleMachineCreation);
 router.put("/update/:id", handleMachineUpdate);
 router.delete("/delete/:id", handleMahineDelete);
 

@@ -38,4 +38,3 @@ const MechanicalEquipment = model(
   mechanicalEquipmentSchema
 );
 module.exports = MechanicalEquipment;
-

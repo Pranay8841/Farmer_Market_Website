@@ -40,7 +40,7 @@ async function handleMachineCreation(req, res) {
   } catch (error) {
     console.error("Error creating user:", error);
     return res.status(500).json({
-      error: "Error creating machine",
+      error: "Server Error",
     });
   }
 }

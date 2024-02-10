@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("imageURL");
 
 router.get("/:id", handleGetAnimal);
-router.post("/createMahine", upload, handleAnimalCreation);
+router.post("/create", upload, handleAnimalCreation);
 router.put("/update/:id", handleAnimalUpdate);
 router.delete("/delete/:id", handleAnimalDelete);
 
