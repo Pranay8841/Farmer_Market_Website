@@ -1,55 +1,30 @@
-const { Router } = require("express");
-const multer = require("multer");
+const express = require('express')
+const router = express.Router();
+
 const {
-  handleUserSignup,
-  handleUserSignin,
-  handleUserUpdate,
-  handleUserDelete,
-  handleGetUser,
+  login,
+  signup,
+  sendotp,
+  changePassword,
 } = require("../controllers/userControl");
-const path = require("path");
 
-const router = Router();
+const {
+  resetPasswordToken,
+  resetPassword,
+} = require("../controllers/resetPassword")
 
-// Set up Multer disk storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.resolve(`./public/uploads/profiles/`));
-  },
-  filename: function (req, file, cb) {
-    const filename = `${Date.now()}-${file.originalname}`;
-    cb(null, filename);
-  },
-});
+const {auth} = require("../middlewares/authentication")
 
-// Set up Multer upload instance
-const upload = multer({ storage: storage }).single("profileImageURL");
+router.post("/login", login);
 
-// Route for handling user signup
-router.post("/signup", upload, handleUserSignup);
-router.post("/signin", handleUserSignin);
+router.post("/signup", signup);
 
-router.get("/signup", (req, res) => {
-  return res.render("signup");
-});
+router.post("/sendotp", sendotp);
 
-router.get("/signin", (req, res) => {
-  return res.render("signin");
-});
+router.post("/changepassword", auth, changePassword);
 
-router.get("/logout", (req, res) => {
-  res.clearCookie("token").redirect("/");
-});
+router.post("/reset-password-token", resetPasswordToken)
 
-//REST api for user profile
-router.get("/:id", handleGetUser);
-router.get("/profile", (req, res) => {
-  return res.render("profile", {
-    user: req.user,
-  });
-});
+router.post("/reset-password", resetPassword)
 
-router.delete("/profile/delete/:id", handleUserDelete);
-
-router.put("/profile/update/:id", handleUserUpdate);
 module.exports = router;

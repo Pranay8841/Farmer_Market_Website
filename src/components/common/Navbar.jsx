@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavbarLinks } from '../../data/NavbarLinks'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai"
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import logo from "../../assets/Logos/Logo_Light.png"
+import { useSelector } from 'react-redux'
+import { ACCOUNT_TYPE } from '../../utils/constants'
 
 const Navbar = () => {
+
+    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.profile)
+
+    const [loading, seLoading] = useState(false);
+
     const location = useLocation();
 
     const matchRoute = (route) => {
@@ -52,28 +60,33 @@ const Navbar = () => {
 
                 {/* Login / Signup / Dashboard */}
                 <div className='hidden items-center gap-x-4 md:flex'>
+                    {user && user?.accountType !== ACCOUNT_TYPE.DEALER && user?.accountType !== ACCOUNT_TYPE.SHOP_KEEPER && (
+                        <Link to="/dashboard/cart" className='relative'>
+                            <AiOutlineShoppingCart className='text-2xl text-brown-700' />
 
-                    <Link to="/dashboard/cart" className='relative'>
-                        <AiOutlineShoppingCart className='text-2xl text-brown-700' />
+                            <span className='absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-brown-700 text-center text-xs font-bold text-white'>
+                                1
+                            </span>
+                        </Link>
+                    )}
 
-                        <span className='absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-brown-700 text-center text-xs font-bold text-white'>
-                            1
-                        </span>
-                    </Link>
+                    {token === null && (
+                        <Link to='/login'>
+                            <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
+                                Log In
+                            </button>
+                        </Link>
+                    )}
 
-                    <Link to='/login'>
-                        <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
-                            Log In
-                        </button>
-                    </Link>
+                    {token === null && (
+                        <Link to='/signup'>
+                            <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
+                                Sign Up
+                            </button>
+                        </Link>
+                    )}
 
-                    <Link to='/signup'>
-                        <button className='rounded-[8px] border border-brown-700 bg-brown-800 px-[12px] py-[8px] text-white'>
-                            Sign Up
-                        </button>
-                    </Link>
-
-                    <ProfileDropDown />
+                    {token !== null && <ProfileDropDown />}
                 </div>
 
                 <button className="mr-4 md:hidden">
