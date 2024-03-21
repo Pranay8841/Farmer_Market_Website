@@ -11,10 +11,12 @@ import UpdatePassword from './pages/UpdatePassword'
 import PrivateRoute from './components/core/Auth/PrivateRoute'
 import Dashboard from './pages/Dashboard'
 import MyProfile from './components/core/Dashboard/MyProfile'
+import Error from './pages/Error'
+import Settings from './components/core/Dashboard/Settings'
 
 const App = () => {
   return (
-    <div className='w-screen min-h-screen bg-main flex flex-col font-inter'>
+    <div className='w-screen min-h-screen bg-richblue-500 flex flex-col font-inter'>
       <Navbar />
 
       <Routes>
@@ -71,7 +73,11 @@ const App = () => {
           </PrivateRoute>
         }>
           <Route path='dashboard/my-profile' element={<MyProfile />} />
+
+          <Route path='dashboard/Settings' element={<Settings />} />
         </Route>
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   )

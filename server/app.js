@@ -6,6 +6,9 @@ const database = require("./config/database.js")
 const app = express();
 
 const userRoutes = require("./routes/userRoute.js")
+const profileRoutes = require("./routes/profileRoute.js");
+const fileUpload = require("express-fileupload");
+const { cloudinaryConnect } = require("./config/cloudinary.js");
 
 const PORT = process.env.PORT || 4000;
 
@@ -22,8 +25,19 @@ app.use(
   })
 )
 
+app.use(
+  fileUpload({
+    useTempFiles:true,
+    tempFileDir:"/tmp",
+  })
+)
+
+// cloudinary Connection
+cloudinaryConnect();
+
 // Routes
 app.use("/api/v1/auth", userRoutes)
+app.use("/api/v1/profile", profileRoutes);
 
 
 app.get("/", (req, res) => {
