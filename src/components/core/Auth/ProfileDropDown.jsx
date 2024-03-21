@@ -24,21 +24,21 @@ const ProfileDropDown = () => {
       <div className='flex items-center gap-x-1'>
         <img src={user?.image}
           alt={`profile-${user?.firstName}`}
-          className='aspect-square w-[30px] rounded-full object-cover'
+          className='aspect-square w-[30px] rounded-full object-cover border border-richblue-300'
         />
 
-        <AiOutlineCaretDown className="text-sm text-brown-700" />
+        <AiOutlineCaretDown className="text-sm text-white" />
       </div>
 
       {
         open && (
           <div
             onClick={(e) => e.stopPropagation()}
-            className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-brown-700 overflow-hidden rounded-md border-[1px] border-brown-700 bg-main"
+            className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-richblue-400 overflow-hidden rounded-md border-[1px] border-richblue-300 bg-richblue-400"
             ref={ref}
           >
             <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
-              <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text- font-bold text-[#7e7e73]  hover:text-brown-700">
+              <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] font-bold text-richblack-200  hover:text-white">
                 <VscDashboard className='text-lg' />
                 Dashboard
               </div>
@@ -49,7 +49,7 @@ const ProfileDropDown = () => {
                 dispatch(logout(navigate))
                 setOpen(false)
               }}
-              className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text- font-bold text-[#7e7e73]  hover:text-brown-700">
+              className="flex w-full items-center gap-x-1 py-[10px] px-[12px] font-bold text-richblack-200  hover:text-white">
               <VscSignOut className='text-lg' />
               Log Out
             </div>
