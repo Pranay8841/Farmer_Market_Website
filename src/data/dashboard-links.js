@@ -40,7 +40,7 @@ export const sidebarLinks = [
         name: "My Orders",
         path: "/dashboard/my-orders",
         type: ACCOUNT_TYPE.FARMER,
-        icon: "VscMorterBoard",
+        icon: "VscMortarBoard",
     },
     {
         id: 7,
