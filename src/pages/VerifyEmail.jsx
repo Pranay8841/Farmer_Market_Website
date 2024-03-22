@@ -54,11 +54,11 @@ const VerifyEmail = () => {
                     ) :
                     (
                         <div className="max-w-[500px] p-4 lg:p-8">
-                            <h1 className="text-white font-bold text-[1.875rem] leading-[2.375rem] text-center">
+                            <h1 className="text-brown-700 font-bold text-[1.875rem] leading-[2.375rem] text-center">
                                 Verify Email
                             </h1>
 
-                            <p className="text-[1.125rem] leading-[1.625rem] my-4 text-richblack-200">
+                            <p className="text-[1.125rem] leading-[1.625rem] my-4 text-brown-500">
                                 A verification code has been sent to you. Enter the code below
                             </p>
 
@@ -74,7 +74,7 @@ const VerifyEmail = () => {
                                             style={{
                                                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                                             }}
-                                            className="w-[48px] lg:w-[60px] border-[2px] border-richblue-300 bg-main rounded-[0.5rem] text-richblue-700 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-brown-800"
+                                            className="w-[48px] lg:w-[60px] border border-brown-600 bg-main rounded-[0.5rem] text-brown-700 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-brown-800"
                                         />)}
                                     containerStyle={{
                                         justifyContent: "space-between",
@@ -83,7 +83,7 @@ const VerifyEmail = () => {
                                 />
                                 <button
                                     type="submit"
-                                    className="w-full bg-richblue-400 py-[12px] px-[12px] rounded-[8px] mt-6 font-bold text-white border border-richblue-300"
+                                    className="w-full bg-brown-700 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-white"
                                 >
                                     Verify Email
                                 </button>

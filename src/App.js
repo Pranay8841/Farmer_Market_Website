@@ -16,7 +16,7 @@ import Settings from "./components/core/Dashboard/Settings";
 
 const App = () => {
   return (
-    <div className="w-screen min-h-screen bg-richblue-700 flex flex-col font-inter">
+    <div className='w-screen min-h-screen bg-richblue-500 flex flex-col font-inter'>
       <Navbar />
 
       <Routes>

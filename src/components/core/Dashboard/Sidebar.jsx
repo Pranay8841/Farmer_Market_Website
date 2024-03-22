@@ -26,7 +26,7 @@ const Sidebar = () => {
     }
     return (
         <>
-            <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblue-300 bg-richblue-700 py-10">
+            <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-white bg-richblue-500 py-10">
                 <div className='flex flex-col'>
                     {
                         sidebarLinks.map((link) => {
@@ -40,7 +40,7 @@ const Sidebar = () => {
                     }
                 </div>
 
-                <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-richblue-300" />
+                <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-white" />
 
                 <div className="flex flex-col">
                     <SidebarLink
@@ -60,8 +60,8 @@ const Sidebar = () => {
                         }
                         className="px-8 py-2 text-sm font-medium text-white"
                     >
-                        <div className="flex items-center gap-x-2 text-sm font-medium">
-                            <VscSignOut />
+                        <div className="flex items-center gap-x-2">
+                            <VscSignOut className="text-2xl font-bold" />
                             <span>Logout</span>
                         </div>
                     </button>
